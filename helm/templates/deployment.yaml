@@ -45,6 +45,72 @@ spec:
           {{- end}}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
+
+            - name: HOST
+              value: "0.0.0.0"
+            - name: PORT
+              value: "{{ .Values.container.port | default 3000 }}"
+            - name: NODE_ENV
+              value: production
+            - name: APP_KEYS
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.app.secret }}
+                  key: APP_KEYS
+            - name: API_TOKEN_SALT
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.app.secret }}
+                  key: API_TOKEN_SALT
+            - name: ADMIN_JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.app.secret }}
+                  key: ADMIN_JWT_SECRET
+            - name: TRANSFER_TOKEN_SALT
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.app.secret }}
+                  key: TRANSFER_TOKEN_SALT
+            - name: ENCRYPTION_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.app.secret }}
+                  key: ENCRYPTION_KEY
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.app.secret }}
+                  key: JWT_SECRET
+            - name: DATABASE_CLIENT
+              value: postgres
+            - name: DATABASE_SSL
+              value: "false"
+            - name: DATABASE_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.db.secret }}
+                  key: dbname
+            - name: DATABASE_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.db.secret }}
+                  key: host
+            - name: DATABASE_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.db.secret }}
+                  key: port
+            - name: DATABASE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.db.secret }}
+                  key: user
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.db.secret }}
+                  key: password
             {{- toYaml .Values.env | nindent 12 }}
           ports:
             - name: http

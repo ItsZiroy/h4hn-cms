@@ -17,6 +17,9 @@ image:
 
 imagePullSecrets: []
 
+db:
+  secret: ""
+
 nameOverride: ""
 
 serviceAccount:
