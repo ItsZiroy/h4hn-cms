@@ -1,5 +1,5 @@
 apiVersion: v2
-name: repo-template
+name: h4hn-cms
 description: A Helm chart for deploying the car-ui interface for TD iam
 
 # A chart can be either an 'application' or a 'library' chart.
