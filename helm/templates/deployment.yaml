@@ -45,7 +45,6 @@ spec:
           {{- end}}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-
             - name: HOST
               value: "0.0.0.0"
             - name: PORT
@@ -111,7 +110,9 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.db.secret }}
                   key: password
+            {{- if .Values.env }}
             {{- toYaml .Values.env | nindent 12 }}
+            {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.container.port | default 3000 }}
