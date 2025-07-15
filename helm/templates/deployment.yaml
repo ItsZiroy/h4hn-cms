@@ -126,7 +126,7 @@ spec:
           {{- with .Values.volumeMounts }}
           volumeMounts:
             - name: {{ include "helm.name" . }}-uploads
-              mountPath: /app/public/uploads
+              mountPath: /opt/app/public/uploads
             {{- toYaml . | nindent 12 }}
           {{- end }}
       {{- with .Values.volumes }}
