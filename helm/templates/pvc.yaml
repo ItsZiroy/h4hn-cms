@@ -1,0 +1,17 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: {{ include "helm.fullname" . }}-uploads
+  namespace: {{ template "helm.name" . }}
+  labels:
+    app: {{ include "helm.name" . }}
+    chart: {{ include "helm.chart" . }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.pvc.size }}
+      {{- if .Values.pvc.storageClass }}
+      storageClassName: {{ .Values.pvc.storageClass | default "standard" }}
+      {{- end }}
