@@ -123,19 +123,13 @@ spec:
             {{- toYaml .Values.readinessProbe | nindent 12 }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          {{- with .Values.volumeMounts }}
           volumeMounts:
             - name: {{ include "helm.name" . }}-uploads
               mountPath: /opt/app/public/uploads
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
-      {{- with .Values.volumes }}
       volumes:
         - name: {{ include "helm.name" . }}-uploads
           persistentVolumeClaim:
             claimName: {{ include "helm.fullname" . }}-uploads
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
