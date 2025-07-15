@@ -75,6 +75,9 @@ ingressRoute:
 #        - name: teckdigital-website
 #          port: 80:80
 
+persistence:
+  size: 1Gi
+
 resources:
   {}
   # We usually recommend not to specify default resources and to leave this as a conscious

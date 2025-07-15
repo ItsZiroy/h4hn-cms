@@ -11,7 +11,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: {{ .Values.pvc.size }}
-      {{- if .Values.pvc.storageClass }}
-      storageClassName: {{ .Values.pvc.storageClass | default "standard" }}
+      storage: {{ .Values.persistence.size }}
+      {{- if .Values.persistence.storageClass }}
+      storageClassName: {{ .Values.persistence.storageClass | default "standard" }}
       {{- end }}
