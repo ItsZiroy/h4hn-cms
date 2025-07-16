@@ -74,6 +74,19 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::icon.icon"
+    },
+    "poster": {
+      "type": "media",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
     }
   }
 }
