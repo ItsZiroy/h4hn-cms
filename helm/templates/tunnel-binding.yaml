@@ -11,8 +11,8 @@ subjects:
             target: {{ .Values.tunnelBinding.subject.target | default "https://traefik-web-service.net.svc.cluster.local:443" | quote }}
             noTlsVerify: {{ .Values.tunnelBinding.subject.noTlsVerify | default true }}
 tunnelRef:
-    kind: {{ .Values.tunnelBinding.tunnelRefKind | default "ClusterTunnel" }}
-    name: {{ .Values.tunnelBinding.tunnelRefName | default "lot01-tunnel" }}
+    kind: {{ .Values.tunnelBinding.tunnelRef.kind | default "ClusterTunnel" }}
+    name: {{ .Values.tunnelBinding.tunnelRef.name | default "lot01-tunnel" }}
 {{- end }}
 
 

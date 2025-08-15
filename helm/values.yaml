@@ -77,6 +77,13 @@ ingressRoute:
 
 tunnelBinding:
   enabled: true
+  subject:
+    name: ""
+    target: ""
+    noTlsVerify: true
+  tunnelRef:
+    kind: ""
+    name: ""
 
 persistence:
   size: 1Gi
