@@ -5,11 +5,11 @@ metadata:
     name: {{ template "helm.name" . }}
 subjects:
     - name: {{ .Values.tunnelBinding.subject.name | default "traefik-web-service" }}
-        kind: Service
-        spec:
-            fqdn: {{ .Values.hostname | quote }}
-            target: {{ .Values.tunnelBinding.subject.target | default "https://traefik-web-service.net.svc.cluster.local:443" | quote }}
-            noTlsVerify: {{ .Values.tunnelBinding.subject.noTlsVerify | default true }}
+      kind: Service
+      spec:
+        fqdn: {{ .Values.hostname | quote }}
+        target: {{ .Values.tunnelBinding.subject.target | default "https://traefik-web-service.net.svc.cluster.local:443" | quote }}
+        noTlsVerify: {{ .Values.tunnelBinding.subject.noTlsVerify | default true }}
 tunnelRef:
     kind: {{ .Values.tunnelBinding.tunnelRef.kind | default "ClusterTunnel" }}
     name: {{ .Values.tunnelBinding.tunnelRef.name | default "lot01-tunnel" }}
