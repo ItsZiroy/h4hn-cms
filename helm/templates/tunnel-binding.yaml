@@ -1,6 +1,7 @@
 {{- if .Values.tunnelBinding.enabled }}
 apiVersion: networking.cfargotunnel.com/v1alpha1
 kind: TunnelBinding
+namespace: net
 metadata:
     name: {{ template "helm.name" . }}
 subjects:
