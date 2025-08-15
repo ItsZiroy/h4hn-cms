@@ -1,12 +1,12 @@
 {{- if .Values.tunnelBinding.enabled }}
 apiVersion: networking.cfargotunnel.com/v1alpha1
 kind: TunnelBinding
-namespace: net
 metadata:
     name: {{ template "helm.name" . }}
 subjects:
     - name: {{ .Values.tunnelBinding.subject.name | default "traefik-web-service" }}
       kind: Service
+      namespace: net
       spec:
         fqdn: {{ .Values.hostname | quote }}
         target: {{ .Values.tunnelBinding.subject.target | default "https://traefik-web-service.net.svc.cluster.local:443" | quote }}
