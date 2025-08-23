@@ -23,6 +23,16 @@
         "videos",
         "audios"
       ]
+    },
+    "logo_dark": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     }
   }
 }
