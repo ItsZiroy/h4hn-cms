@@ -12,7 +12,7 @@ spec:
   selector:
     matchLabels:
       {{- include "helm.selectorLabels" . | nindent 6 }}
-  updateStrategy:
+  strategy:
     type: Recreate
   template:
     metadata:
