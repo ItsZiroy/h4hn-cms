@@ -12,6 +12,8 @@ spec:
   selector:
     matchLabels:
       {{- include "helm.selectorLabels" . | nindent 6 }}
+  updateStrategy:
+    type: Recreate
   template:
     metadata:
       {{- with .Values.podAnnotations }}
