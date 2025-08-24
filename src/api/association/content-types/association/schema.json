@@ -33,6 +33,12 @@
         "videos",
         "audios"
       ]
+    },
+    "courses": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::course.course",
+      "mappedBy": "association"
     }
   }
 }

@@ -384,6 +384,7 @@ export interface ApiAssociationAssociation extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    courses: Schema.Attribute.Relation<'oneToMany', 'api::course.course'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -397,6 +398,42 @@ export interface ApiAssociationAssociation extends Struct.CollectionTypeSchema {
     logo_dark: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiCourseCourse extends Struct.CollectionTypeSchema {
+  collectionName: 'courses';
+  info: {
+    displayName: 'Course';
+    pluralName: 'courses';
+    singularName: 'course';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    association: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::association.association'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    header: Schema.Attribute.Media<'images' | 'videos'>;
+    lectures: Schema.Attribute.Relation<'oneToMany', 'api::lecture.lecture'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::course.course'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    semester: Schema.Attribute.Relation<'manyToOne', 'api::semester.semester'>;
+    slug: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -492,6 +529,45 @@ export interface ApiIconIcon extends Struct.CollectionTypeSchema {
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     url: Schema.Attribute.String;
+  };
+}
+
+export interface ApiLectureLecture extends Struct.CollectionTypeSchema {
+  collectionName: 'lectures';
+  info: {
+    displayName: 'Lecture';
+    pluralName: 'lectures';
+    singularName: 'lecture';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    course: Schema.Attribute.Relation<'manyToOne', 'api::course.course'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.RichText;
+    end: Schema.Attribute.DateTime;
+    files: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::lecture.lecture'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    start: Schema.Attribute.DateTime;
+    topic: Schema.Attribute.String;
+    type: Schema.Attribute.Enumeration<
+      ['lecture', 'excercise', 'presentation', 'exam']
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -628,6 +704,37 @@ export interface ApiResumeResume extends Struct.SingleTypeSchema {
       'oneToMany',
       'api::experience.experience'
     >;
+  };
+}
+
+export interface ApiSemesterSemester extends Struct.CollectionTypeSchema {
+  collectionName: 'semesters';
+  info: {
+    displayName: 'Semester';
+    pluralName: 'semesters';
+    singularName: 'semester';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    courses: Schema.Attribute.Relation<'oneToMany', 'api::course.course'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    end: Schema.Attribute.Date;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::semester.semester'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    start: Schema.Attribute.Date;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -1175,10 +1282,13 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::association.association': ApiAssociationAssociation;
+      'api::course.course': ApiCourseCourse;
       'api::experience.experience': ApiExperienceExperience;
       'api::icon.icon': ApiIconIcon;
+      'api::lecture.lecture': ApiLectureLecture;
       'api::project.project': ApiProjectProject;
       'api::resume.resume': ApiResumeResume;
+      'api::semester.semester': ApiSemesterSemester;
       'api::summary.summary': ApiSummarySummary;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

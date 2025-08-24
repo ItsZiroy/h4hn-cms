@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "collectionName": "courses",
+  "info": {
+    "singularName": "course",
+    "pluralName": "courses",
+    "displayName": "Course"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "header": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "videos"
+      ]
+    },
+    "lectures": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::lecture.lecture",
+      "mappedBy": "course"
+    },
+    "semester": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::semester.semester",
+      "inversedBy": "courses"
+    },
+    "association": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::association.association",
+      "inversedBy": "courses"
+    }
+  }
+}
