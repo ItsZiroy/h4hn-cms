@@ -25,7 +25,12 @@
     },
     "type": {
       "type": "enumeration",
-      "enum": ["lecture", "exercise", "presentation", "exam"]
+      "enum": [
+        "lecture",
+        "exercise",
+        "presentation",
+        "exam"
+      ]
     },
     "course": {
       "type": "relation",
@@ -36,7 +41,12 @@
     "files": {
       "type": "media",
       "multiple": true,
-      "allowedTypes": ["images", "files", "videos", "audios"]
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     }
   }
 }

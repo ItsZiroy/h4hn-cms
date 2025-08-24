@@ -15,7 +15,8 @@
       "type": "string"
     },
     "slug": {
-      "type": "string"
+      "type": "string",
+      "unique": true
     },
     "header": {
       "type": "media",
@@ -42,6 +43,11 @@
       "relation": "manyToOne",
       "target": "api::association.association",
       "inversedBy": "courses"
+    },
+    "links": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::icon.icon"
     }
   }
 }
